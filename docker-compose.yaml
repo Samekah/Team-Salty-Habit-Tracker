@@ -1,0 +1,12 @@
+version: '3'
+services:
+  server:
+    image: node:latest
+    working_dir: /code
+    ports: 
+      - 3000:3000
+    volumes:
+      - type: bind
+        source: ./api
+        target: /code
+    command: bash -c "npm install && npm start"

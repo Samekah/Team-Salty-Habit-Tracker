@@ -1,4 +1,5 @@
 const db = require('../dbConfig');
+const Habit = require('./Habits');
 
 class User {
   constructor(data) {
@@ -51,7 +52,24 @@ class User {
     });
   }
 
-  static findAUsersHabitsById(id) {}
+  static findAUsersHabitsById(id) {
+    return new Promise(async (res, rej) => {
+      try {
+        // let userHabitsInfo = db.query(
+        //   `SELECT habits.*, user_habits.starting_date, user_habits_history.the_date FROM habits JOIN user_habits ON habits.id = user_habits.habit_id JOIN user_habits_history ON user_habits.id=user_habits_history.user_habit_id WHERE user_habits.user_id = $1;`,
+        //   [id]
+        // );   CAN WORK ON THIS WHEN SUBCLASS IS MADE
+        let userHabitsInfo = db.query(
+          `SELECT habits.*, user_habits.starting_date FROM habits JOIN user_habits ON habits.id = user_habits.habit_id WHERE user_habits.user_id = $1;`,
+          [id]
+        );
+        let usersHabitsList = userHabitsInfo.rows[0].map((row) => new Habit(row));
+        res(usersHabitsList);
+      } catch (err) {
+        rej('Could not access user habits');
+      }
+    });
+  }
 }
 
 module.exports = User;

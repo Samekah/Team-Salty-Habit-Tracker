@@ -20,14 +20,15 @@ h1, h4, h2 {
     display: inline;
 }
 
-#userInfo, #quote, #habit {
+#userInfo, #quote, #habitSection {
     border: 2px solid black;
 }
 
-#habitItem{
-    display:inline;
+.habitItem{
+    margin: 15px 0px;;
 }
 
 .container{
     margin-bottom: 15px;
+    padding: 15px 30px !important;
 }

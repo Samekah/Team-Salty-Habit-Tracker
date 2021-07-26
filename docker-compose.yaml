@@ -5,8 +5,27 @@ services:
     working_dir: /code
     ports: 
       - 3000:3000
+    environment: 
+      - PGUSER=futureproof
+      - PGHOST=db
+      - PGPASSWORD=supersecret
+      - PGDATABASE=habit_tracker
+      - PGPORT=5432
+    depends_on:
+      - db
     volumes:
       - type: bind
         source: ./api
         target: /code
     command: bash -c "npm install && npm start"
+  db:
+    image: postgres:latest
+    volumes:
+        - "dbdata:/var/lib/postgresql/data"
+        - "./db:/docker-entrypoint-initdb.d/:ro"
+    environment: 
+        - POSTGRES_DB=habit_tracker
+        - POSTGRES_USER=futureproof
+        - POSTGRES_PASSWORD=supersecret
+volumes:
+    dbdata:

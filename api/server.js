@@ -24,16 +24,16 @@ server.post('/register', async (req,res) => {
         const hashedPassword = await bcrypt.hash(req.body.password, salt)
 
         const user = await User.create(req.body.username, req.body.email, req.body.first_name, req.body.last_name, hashedPassword)
-        res.sendStatus(201).send('User successfully created')
+        res.status(201).send('User successfully created')
     } catch (err) {
-        res.sendStatus(500).send('Error creating user ' + err)
+        res.status(500).send('Error creating user ' + err)
     }
 })
 
 // Login route
 server.post('/login', async (req,res) => {
     const username = req.body.username
-    const user = User.find(username)
+    const user = User.findUserByUsername(username)
     if (user == null) {
         return res.status(400).send('Cannot find the user')
     }

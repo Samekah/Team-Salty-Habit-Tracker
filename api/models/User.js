@@ -5,7 +5,7 @@ class User {
   constructor(data) {
     this.id = data.id; //may be problematic
     this.username = data.username;
-    this.password = data.password_digest;
+    this.password = data.password;
     this.firstname = data.first_name;
     this.lastname = data.last_name;
     this.email = data.email_address;
@@ -28,7 +28,7 @@ class User {
   static findUserByUsername(username) {
     return new Promise(async (res, rej) => {
       try {
-        let allUserData = await db.query(`SELECT users.id, users.username FROM users WHERE users.username = $1`, [username]);
+        let allUserData = await db.query(`SELECT id, username, password FROM users WHERE username = $1;`, [username]);
         let user = new User(allUserData.rows[0]);
         res(user);
       } catch (err) {

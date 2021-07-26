@@ -23,10 +23,10 @@ server.post('/register', async (req,res) => {
         const salt = await bcrypt.genSalt()
         const hashedPassword = await bcrypt.hash(req.body.password, salt)
 
-        const user = await User.create(req.body.username, req.body.email, req.body.first_name, req.body.last_name, hashedPassword)
-        res.status(201).send('User successfully created')
+        const user = await User.create(req.body.username, hashedPassword, req.body.first_name, req.body.last_name, req.body.email)
+        res.status(201).send(user)
     } catch (err) {
-        res.status(500).send('Error creating user ' + err)
+        res.status(500).send(err)
     }
 })
 

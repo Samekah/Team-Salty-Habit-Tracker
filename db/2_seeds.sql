@@ -1,9 +1,9 @@
-INSERT INTO category (category) 
+INSERT INTO categories (category) 
 VALUES
     ('Dietary'),
     ('Health');
 
-INSERT INTO habit (habit, category_id) 
+INSERT INTO habits (habit, category_id) 
 VALUES
     ('Drink Water', 1 ),
     ('Consume Calories', 1 ),

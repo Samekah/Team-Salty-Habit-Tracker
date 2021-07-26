@@ -46,7 +46,7 @@ class User {
         let newUser = new User(newUserIntoDb.rows[0]);
         res(newUser);
       } catch (err) {
-        ('Could not create user');
+        rej('Could not create user' + err);
       }
     });
   }

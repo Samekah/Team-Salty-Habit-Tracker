@@ -3,13 +3,7 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     id serial PRIMARY KEY,
     username varchar(50) UNIQUE,
-    password varchar(30) NOT NULL
-);
-
-DROP TABLE IF EXISTS user_details;
-
-CREATE TABLE user_details (
-    user_id int NOT NULL,
+    password varchar(100) NOT NULL,
     first_name varchar(200),
     last_name varchar(200),
     email_address varchar(256) UNIQUE

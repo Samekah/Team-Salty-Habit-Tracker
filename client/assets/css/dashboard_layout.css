@@ -12,14 +12,22 @@
     margin: 0;
 } */
 
+header{
+    margin-bottom: 15px;
+}
+
+h1, h4, h2 {
+    display: inline;
+}
+
 #userInfo, #quote, #habit {
     border: 2px solid black;
 }
 
-h1, h4, h2{
-    display: inline;
-}
-
 #habitItem{
     display:inline;
+}
+
+.container{
+    margin-bottom: 15px;
 }

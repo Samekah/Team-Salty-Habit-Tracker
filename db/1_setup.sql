@@ -28,7 +28,7 @@ DROP TABLE IF EXISTS user_habits;
 
 CREATE TABLE user_habits (
     id serial PRIMARY KEY,
-    users_id int not null,
+    user_id int not null,
     habit_id int not null,
     frequency_id int,
     starting_date DATE

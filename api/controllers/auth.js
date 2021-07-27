@@ -3,12 +3,14 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 
+const { authenticateToken } = require('../middleware/auth');
+
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 
 const User = require('../models/user');
 
-router.get('/', AuthenticateToken, (req,res) => {
+router.get('/', authenticateToken, (req,res) => {
     try {
         res.status(200).json({messsage: 'Authorized'})
     } catch (err) {
@@ -45,7 +47,7 @@ router.post('/login', async (req, res) => {
                     token: "Bearer " + token,
                 });
             }
-            jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 60 }, sendToken);
+            jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 }, sendToken);
         } else {
             throw new Error('User could not be authenticated')  
         }
@@ -54,21 +56,5 @@ router.post('/login', async (req, res) => {
         res.status(401).json({ err });
     }
 })
-
-function AuthenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1]
-    if(token == null) return res.status(401).json({message: "Token missing"})
-
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        console.log(err)
-        if(err) {
-            res.sendStatus(403)
-        } else {
-            req.user = user
-            next()
-        }
-    })
-}
 
 module.exports = router

@@ -1,23 +1,9 @@
-let habitTrack = document.querySelectorAll("[id^='updateStreak']");
-let habitStreakTrack = new Array(habitTrack.length);
+let categoryItems = document.querySelectorAll("[id^='category']");
 
-console.log(habitTrack);
-console.log(habitStreakTrack);
-
-//to be used to retrieve data from database
-// window.onload = function(){
-
-// };
-
-// for(let i = 0; i < habitStreakTrack.length; i++){
-//     habitStreakTrack[i] = 0;
-//     console.log(habitStreakTrack[i]);
-// }
-
-for(let i = 0; i < habitTrack.length; i++){
+for(let i = 0; i < categoryItems.length; i++){
     
-    habitStreakTrack[i] = 0;
-    console.log(habitStreakTrack[i]);
+    // habitStreakTrack[i] = 0;
+    // console.log(habitStreakTrack[i]);
 
     habitTrack[i].addEventListener("click", ()=>{
         let habitTitle = document.querySelector(`#habitTitle${i+1}`);
@@ -33,8 +19,7 @@ for(let i = 0; i < habitTrack.length; i++){
 }
 
 /*Todo:
-    -[x] find each log button
-    -[x] add events to each button
+    -[x] find each category button
     -[x] find habit title from log button
     -[x] figure out how to increase streak value
     -[] find the habit based on habit name

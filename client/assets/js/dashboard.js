@@ -44,4 +44,5 @@ for(let i = 0; i < habitTrack.length; i++){
         -[] if not set streak to 1
     -[] Pull data from database
     -[] If at a certain time if the log button isnt disabled - log no item + set streak to 0
+    -[] on page load get data from database
 */

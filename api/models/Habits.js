@@ -36,4 +36,4 @@ class Habit {
   }
 }
 
-module.exports = User;
+module.exports = Habit;

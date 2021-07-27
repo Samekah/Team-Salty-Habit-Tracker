@@ -6,11 +6,11 @@ class Category {
     this.category = data.category;
   }
 
-  static getAllCategories() {
+  static get all() {
     return new Promise(async (res, rej) => {
       try {
         let result = await db.query(`SELECT * FROM categories;`);
-        let allCategories = result.rows.map((r) => new User(r));
+        let allCategories = result.rows.map((r) => new Category(r));
         res(allCategories);
       } catch (err) {
         rej('Could not retrieve all categories:' + err);
@@ -18,10 +18,10 @@ class Category {
     });
   }
 
-  static getCategoryById(id) {
+  static getCategoryById(category_id) {
     return new Promise(async (res, rej) => {
       try {
-        let result = db.query(`SELECT * FROM categories where category_id=$1;`, [category_id]);
+        let result = await db.query(`SELECT * FROM categories WHERE id = $1;`, [category_id]);
         let chosenCategory = new Category(result.rows[0]);
         res(chosenCategory);
       } catch (err) {
@@ -30,3 +30,5 @@ class Category {
     });
   }
 }
+
+module.exports = Category;

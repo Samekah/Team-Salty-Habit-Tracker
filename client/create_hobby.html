@@ -11,15 +11,16 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     </head>
     <body>
-        <header>
-            <nav class="navbar justify-content-center navbar-expand-lg navbar-light">
-                <ul class = "navbar-nav">
-                    <li class="nav-item active">
-                        <a class ="nav-link" href = "#">[UserName]</a>
-                    </li>
-                </ul>       
-            </nav>
-        </header>       
+        <nav class="navbar justify-content-center navbar-expand-lg navbar-light">
+            <ul class = "navbar-nav">
+                <li class="nav-item active">
+                    <a class ="nav-link" href = "dashboard.html">[UserName]</a>
+                </li>
+                <li class="nav-item">
+                    <a class ="nav-link" href = "#">[Logout]</a>
+                </li>
+            </ul>       
+        </nav>      
         <div id="content" class="container" style="border:2px solid gold;">
             <div class="row row-cols-3"> 
                 <div class="col" style="border:2px solid red;">CATEGORY 1</div>
@@ -28,8 +29,16 @@
                 <div class="col-6 d-flex justify-content-center" style="border:2px solid red;">CATEGORY 4</div>
                 <div class="col-6" style="border:2px solid red;">CATEGORY 5</div>
             </div>
+
+            <div class="d-flex justify-content-center">
+                <div>
+                    <p>combobox here</p>
+                </div>
+
+            </div> 
+
             <div class="d-flex justify-content-center"> 
-                <input type="submit" value="Submit Habit!">
+                <input id="submit" type="submit" value="Submit Habit!">
             </div>  
         </div>
     </body>

@@ -1,5 +1,5 @@
 const db = require('../dbConfig');
-const Habit = require('./Habits');
+const UserHabit = require('./UserHabit');
 
 class User {
   constructor(data) {
@@ -52,24 +52,32 @@ class User {
     });
   }
 
-  static findAUsersHabitsById(id) {
+  static async findAUsersHabitsById(id) {
     return new Promise(async (res, rej) => {
       try {
-        // let userHabitsInfo = db.query(
-        //   `SELECT habits.*, user_habits.starting_date, user_habits_history.the_date FROM habits JOIN user_habits ON habits.id = user_habits.habit_id JOIN user_habits_history ON user_habits.id=user_habits_history.user_habit_id WHERE user_habits.user_id = $1;`,
-        //   [id]
-        // );   CAN WORK ON THIS WHEN SUBCLASS IS MADE
+
         let userHabitsInfo = await db.query(
-          `SELECT habits.*, user_habits.starting_date FROM habits JOIN user_habits ON habits.id = user_habits.habit_id WHERE user_habits.user_id = $1;`,
+          `SELECT user_habits.id, habits.habit, frequency.frequency_name, user_habits.starting_date FROM user_habits JOIN habits ON user_habits.habit_id = habits.id JOIN frequency ON user_habits.frequency_id = frequency.id WHERE user_habits.user_id = $1 ORDER BY user_habits.id;`,
           [id]
         );
-        let usersHabitsList = userHabitsInfo.rows.map((r) => new Habit(r));
-        res(usersHabitsList);
+
+        const resultsArray = [];
+
+        let usersHabitsList = userHabitsInfo.rows.map((r) => new UserHabit(r));
+
+        for(let userHabit of usersHabitsList) {
+          const history = await UserHabit.history(userHabit.id);
+          userHabit.history = history
+          resultsArray.push(userHabit)
+        }
+        
+        res(resultsArray);
       } catch (err) {
         rej('Could not access user habits');
       }
     });
   }
+
 }
 
 module.exports = User;

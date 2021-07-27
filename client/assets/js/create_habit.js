@@ -1,13 +1,26 @@
 let categoryItems = document.querySelectorAll("[id^='category']");
 
+window.onload = function(){
+
+};
+
 for(let i = 0; i < categoryItems.length; i++){
     
     categoryItems[i].addEventListener("click", ()=>{
-        let categoryTitle =  categoryItems[i].textContent;
-        
 
-        
+        let categoryTitle =  categoryItems[i].textContent;
+     
     }); 
+
+}
+
+async function getAllCategories(){
+    try{
+        // const response = await fetch(`http://localhost:3000/${category}`);
+    } catch{
+
+    }
+
 }
 
 /*Todo:

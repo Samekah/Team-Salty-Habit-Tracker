@@ -8,6 +8,8 @@ async function authoriseUser(){
         const options = {
             headers: new Headers({'Authorization': localStorage.getItem('token')}),
         }
+
+        console.log(options);
     
         const response = await fetch('http://localhost:3000/auth', options)
         const data = await response.json()

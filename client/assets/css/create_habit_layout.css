@@ -26,3 +26,7 @@ button[id ^= "category"]{
     margin-top: 40px !important;
 
 }
+
+#createHabit, #dropdown{
+    display:none !important;
+}

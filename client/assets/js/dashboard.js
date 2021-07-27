@@ -32,6 +32,16 @@ for(let i = 0; i < habitTrack.length; i++){
     }); 
 }
 
+const logOut = document.getElementById('logout');
+logOut.addEventListener('click',() => {
+    logout()
+})
+
+function logout(){
+    localStorage.clear();
+    window.location.href = '/login';
+}
+
 /*Todo:
     -[x] find each log button
     -[x] add events to each button

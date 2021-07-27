@@ -1,74 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Register</title>
-        <link rel="stylesheet" href="assets/css/style.css">
-        <script defer src="assets/js/register.js"></script>       
-    </head>
-    <body>
-        <!-- <nav class="navbar justify-content-center navbar-expand-lg navbar-light">
-            <ul class = "container navbar-nav">
-                <li class="nav-item active">
-                    <a class ="nav-link" href = "home.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class ="nav-link" href = "tagPage.html?tag=Sport" class = "active">Sport</a>
-                </li>
-                <li class="nav-item">
-                    <a class ="nav-link" href = "tagPage.html?tag=Music">Music</a>
-                </li>
-                <li class="nav-item">
-                    <a class ="nav-link" href = "tagPage.html?tag=Film">Film</a>
-                </li>
-                <li class="nav-item">
-                    <a class ="nav-link" href = "tagPage.html?tag=Lifestyle">Lifestyle</a>
-                </li>
-                <li class="nav-item">
-                    <a class ="nav-link" href = "tagPage.html?tag=News">News</a>
-                </li>
-                <li class="nav-item">
-                    <a class ="nav-link" href = "tagPage.html?tag=Other">Other</a>
-                </li>
-            </ul>       
-        </nav> -->
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <div class="main">
-            <div class="register">
-                <h2>Sign Up</h2>
-                <p>Please fill in this form to create an account.</p>
-                <hr>
-                <form id="register">
-                    <label>First Name:</label>
-                    <br>
-                    <input type="text" name="fname" id="fname" placeholder="Enter Your First Name" required>
-                    <br><br>
-                    <label>Last Name:</label>
-                    <br>
-                    <input type="text" name="lname" id="lname" placeholder="Enter Your Last Name" required>
-                    <br><br>
-                    <label>Username:</label>
-                    <br>
-                    <input type="text" name="username" id="username" placeholder="Enter Your Username" autocomplete="off" required>
-                    <br><br>
-                    <label>Password:</label>
-                    <br>
-                    <input type="password" name="password" id="password" placeholder="Enter Your Password" autocomplete="off" required>
-                    <br><br>
-                    <label>Re-Enter Password:</label>
-                    <br>
-                    <input type="password" name="rpassword" id="rpassword" placeholder="Re-enter Your Password" autocomplete="off" required>
-                    <br><br>
-                    <label>Email:</label>
-                    <br>
-                    <input type="email" name="email" id="email" placeholder="Enter Your Email" required>
-                    <br><br>
-                    <input type="submit" value="Sign Up" name="register">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-                </form> 
+    <title>Register</title>
+  </head>
+  <body>
+
+    <style>
+        body {
+            background: #fff6D6;
+        }
+
+        .logindiv {
+            background: #d6daff;
+            opacity: 0.8;
+        }
+
+        input [type="username"] {
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+        input [type="password"] {
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border-top: 0px;
+        }
+    </style>
+
+
+
+
+    <div class="logindiv text-center mt-5">
+        <form style="max-width:480px;margin:auto;">
+            <h1 class="h3 mt-4 mb-3 font-weight-normal">Register an Account</h1>
+            
+            <label for="fname" class="sr-only"></label>
+            <input for="fname" type="text" id="fname" class="form-control" placeholder="First Name" required autofocus>
+            
+            <label for="lname" class="sr-only"></label>
+            <input for="lname" type="text" id="lname" class="form-control" placeholder="Last Name" required autofocus>
+
+            <label for="email" class="sr-only"></label>
+            <input for="email" type="text" id="email" class="form-control" placeholder="Email" required autofocus>
+
+            <label for="username" class="sr-only"></label>
+            <input type="text" id="username" class="form-control" placeholder="Username" required autofocus>
+
+            <label for="password" class="sr-only"></label>
+            <input for="password" type="text" id="password" class="form-control" placeholder="Password" required autofocus>
+
+            <label for="cpassword" class="sr-only"></label>
+            <input for="cpassword" type="text" id="cpassword" class="form-control" placeholder="Confirm Password" required autofocus>     
+            
+
+
+            <div class="checkbox mt-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Confirm Details
+                </label>
             </div>
-        </div>
-    </body>
+            <div class="mt-3">
+                <button class="btn btn-lg btn-primary btn-block">Register</button>
+            </div>
+        </form>
+
+
+
+
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
 </html>

@@ -1,13 +1,14 @@
 const db = require('../dbConfig');
+const Habit = require('./Habits');
 
 class User {
   constructor(data) {
     this.id = data.id; //may be problematic
     this.username = data.username;
-    this.email = data.email_address;
+    this.password = data.password;
     this.firstname = data.first_name;
     this.lastname = data.last_name;
-    this.password = data.password_digest;
+    this.email = data.email_address;
   }
 
   static getAllUserData() {
@@ -27,7 +28,7 @@ class User {
   static findUserByUsername(username) {
     return new Promise(async (res, rej) => {
       try {
-        let allUserData = await db.query(`SELECT users.id, users.username FROM users WHERE users.username = $1`, [username]);
+        let allUserData = await db.query(`SELECT id, username, password FROM users WHERE username = $1;`, [username]);
         let user = new User(allUserData.rows[0]);
         res(user);
       } catch (err) {
@@ -36,24 +37,39 @@ class User {
     });
   }
 
-  static create(username, email, firstname, lastname, password) {
+  static create(username, password, firstname, lastname, email) {
     return new Promise(async (res, rej) => {
       try {
-        let idOfNewUserIntoDb = await db.query(`INSERT INTO users (username, password) VALUES ($1, $5) RETURNING id;`, [username, password]);
-        // Commented out is a different attempt
-        // let newUserId = await db.query(`SELECT id FROM users ORDER BY id DESC LIMIT 1`)
-        // let userId = newUserId.rows[0].id;
-        let newUserDetailsIntoDb = await db.query(
-          `INSERT INTO user_details (user_id, email_address, first_name, last_name) VALUES (${idOfNewUserIntoDb}, $2, $3, $4) RETURNING *`,
-          [email, firstname, lastname]
+        let newUserIntoDb = await db.query(
+          `INSERT INTO users (username, password, first_name, last_name, email_address) VALUES ($1,$2, $3, $4, $5) RETURNING *;`,
+          [username, password, firstname, lastname, email]
         );
+        let newUser = new User(newUserIntoDb.rows[0]);
+        res(newUser);
       } catch (err) {
-        ('Could not create user');
+        rej('Could not create user' + err);
       }
     });
   }
 
-  static findUserById;
+  static findAUsersHabitsById(id) {
+    return new Promise(async (res, rej) => {
+      try {
+        // let userHabitsInfo = db.query(
+        //   `SELECT habits.*, user_habits.starting_date, user_habits_history.the_date FROM habits JOIN user_habits ON habits.id = user_habits.habit_id JOIN user_habits_history ON user_habits.id=user_habits_history.user_habit_id WHERE user_habits.user_id = $1;`,
+        //   [id]
+        // );   CAN WORK ON THIS WHEN SUBCLASS IS MADE
+        let userHabitsInfo = db.query(
+          `SELECT habits.*, user_habits.starting_date FROM habits JOIN user_habits ON habits.id = user_habits.habit_id WHERE user_habits.user_id = $1;`,
+          [id]
+        );
+        let usersHabitsList = userHabitsInfo.rows[0].map((row) => new Habit(row));
+        res(usersHabitsList);
+      } catch (err) {
+        rej('Could not access user habits');
+      }
+    });
+  }
 }
 
 module.exports = User;

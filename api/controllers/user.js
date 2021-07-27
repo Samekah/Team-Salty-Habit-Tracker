@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const UserHabit = require('../models/UserHabit')
 
 async function index(req, res) {
     try {
@@ -28,4 +29,28 @@ async function showHabits(req, res) {
     };
 }
 
-module.exports = { index, show, showHabits }
+async function addHabit(req, res) {
+
+    const {habitId, frequencyId, startDate} = req.body
+
+    try {
+        const habit = await UserHabit.create(req.params.id, habitId, frequencyId, startDate);
+        res.status(201).json(habit);
+    } catch (err) {
+        res.status(500).send(err);
+    };
+}
+
+async function completeHabit(req,res) {
+    let date = new Date();
+    date = date.toISOString().split('T')[0];
+
+    try {
+        const record = await UserHabit.addHistory(req.params.userHabitId,date)
+        res.status(201).json(record)
+    } catch (err) {
+        res.status(500).send(err)
+    }
+}
+
+module.exports = { index, show, showHabits, addHabit, completeHabit }

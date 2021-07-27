@@ -34,6 +34,7 @@ for(let i = 0; i < habitTrack.length; i++){
 
 /*Todo:
     -[x] find each log button
+    -[x] add events to each button
     -[x] find habit title from log button
     -[x] figure out how to increase streak value
     -[] find the habit based on habit name

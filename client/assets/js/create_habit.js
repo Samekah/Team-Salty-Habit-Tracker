@@ -27,4 +27,5 @@ async function getAllCategories(){
     -[] add event listener for submit button
     -[] Send data in variables to be added to database   
     -[] Send back to main page with new item created
+
 */

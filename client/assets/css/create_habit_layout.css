@@ -28,5 +28,5 @@ button[id ^= "category"]{
 }
 
 #createHabit, #dropdown{
-    display:none !;
+    display:none !important;
 }

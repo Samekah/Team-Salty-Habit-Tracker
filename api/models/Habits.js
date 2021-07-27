@@ -8,14 +8,16 @@ const db = require('../dbConfig');
 
 class Habit {
   constructor(data) {
-    (this.id = data.habit_id), (this.habit_name = data.habit_name), (this.category_id = data.category_id);
+    this.id = data.id;
+    this.habit_name = data.habit;
+    this.category_id = data.category_id;
   }
 
-  static getAllHabits() {
+  static get all() {
     return new Promise(async (res, rej) => {
       try {
-        let allHabits = db.query(`SELECT * FROM habits;`);
-        let entireHabitsList = allHabits.rows[0].map((row) => new Habit(row));
+        let allHabits = await db.query(`SELECT * FROM habits;`);
+        let entireHabitsList = allHabits.rows.map((r) => new Habit(r));
         res(entireHabitsList);
       } catch (err) {
         rej('Could not access available habits');
@@ -23,11 +25,23 @@ class Habit {
     });
   }
 
-  static getAllHabitsForCategoryId(category_id) {
+  static findById(id) {
     return new Promise(async (res, rej) => {
       try {
-        let result = db.query(`SELECT * FROM habits where category_id=$1;`, [category_id]);
-        let habitsList = result.rows[0].map((row) => new Habit(row));
+        let data = await db.query(`SELECT * FROM habits WHERE id = $1;`, [id]);
+        let habit = new Habit(data.rows[0]);
+        res(habit);
+      } catch (err) {
+        rej(`Could not find this habit`);
+      }
+    });
+  }
+
+  static findByCategory(category_id) {
+    return new Promise(async (res, rej) => {
+      try {
+        let result = await db.query(`SELECT * FROM habits WHERE category_id = $1;`, [category_id]);
+        let habitsList = result.rows.map((r) => new Habit(r));
         res(habitsList);
       } catch (err) {
         rej('Could not access habits for category');
@@ -36,4 +50,4 @@ class Habit {
   }
 }
 
-module.exports = User;
+module.exports = Habit;

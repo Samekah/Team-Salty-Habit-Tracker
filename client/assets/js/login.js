@@ -1,49 +1,12 @@
-const form = document.getElementById('register');
-form.addEventListener('submit', register);
+const form = document.getElementById('login');
+form.addEventListener('submit', login);
 
-async function register(e) {
+async function login(e) {
     e.preventDefault();
-
-    if (e.target.password.value !== e.target.rpassword.value) {
-        alert('Passwords Do Not Match!');
-        return
-    }
 
     const userData = {
         username: e.target.username.value,
-        password: e.target.password.value,
-        first_name: e.target.fname.value,
-        last_name: e.target.lname.value,
-        email: e.target.email.value,
-    };
-
-    try {
-        const options = { 
-            method: 'POST',
-            body: JSON.stringify(userData),
-            headers: { "Content-Type": "application/json" }
-        };
-    
-        const response = await fetch('http://localhost:3000/auth/register', options)
-        const { user, err } = await response.json()
-        if(err) {
-            throw Error(err)
-        } else {
-            //success so log user in
-            logUserIn(userData.username,userData.password)
-        }
-
-    } catch (err) {
-        console.warn(err);
-    }
-
-};
-
-async function logUserIn(username,password) {
-
-    const userData = {
-        username,
-        password
+        password: e.target.password.value
     }
 
     try {

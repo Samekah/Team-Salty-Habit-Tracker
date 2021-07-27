@@ -15,7 +15,7 @@ class User {
     return new Promise(async (res, rej) => {
       try {
         let allData = await db.query(
-          'SELECT users.id, users.username, user_details.first_name, user_details.last_name, user_details.email_address FROM users JOIN user_details ON users.id = user_details.user_id;'
+          'SELECT id, username, first_name, last_name, email_address FROM users;'
         );
         let allUsers = allData.rows.map((r) => new User(r));
         res(allUsers);
@@ -59,11 +59,11 @@ class User {
         //   `SELECT habits.*, user_habits.starting_date, user_habits_history.the_date FROM habits JOIN user_habits ON habits.id = user_habits.habit_id JOIN user_habits_history ON user_habits.id=user_habits_history.user_habit_id WHERE user_habits.user_id = $1;`,
         //   [id]
         // );   CAN WORK ON THIS WHEN SUBCLASS IS MADE
-        let userHabitsInfo = db.query(
+        let userHabitsInfo = await db.query(
           `SELECT habits.*, user_habits.starting_date FROM habits JOIN user_habits ON habits.id = user_habits.habit_id WHERE user_habits.user_id = $1;`,
           [id]
         );
-        let usersHabitsList = userHabitsInfo.rows[0].map((row) => new Habit(row));
+        let usersHabitsList = userHabitsInfo.rows.map((r) => new Habit(r));
         res(usersHabitsList);
       } catch (err) {
         rej('Could not access user habits');

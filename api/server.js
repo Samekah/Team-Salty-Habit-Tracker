@@ -14,6 +14,7 @@ const habitsRoutes = require('./routes/habit');
 const usersRoutes = require('./routes/user');
 
 server.use('/auth', authRoutes);
+server.use('/category', categoryRoutes);
 server.use('/habit', habitsRoutes);
 server.use('/user', usersRoutes);
 

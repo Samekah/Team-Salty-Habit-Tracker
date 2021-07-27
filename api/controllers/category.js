@@ -1,11 +1,10 @@
+const Category = require('../models/Category');
 const Habit = require('../models/Habits');
 
 async function index(req, res) {
-    console.log('test')
     try {
-        const habits = await User.getAllHabits();
-        console.log(habits)
-        res.status(200).json(habits);
+        const categories = await Category.all;
+        res.status(200).json(categories);
     } catch (err) {
         res.status(500).send(err);
     }
@@ -13,12 +12,20 @@ async function index(req, res) {
 
 async function show(req, res) {
     try {
-        const users = await User.findById(req.params.id);
-        const habits = await user.habits;
-        res.status(200).json({ ...user, habits });
+        const category = await Category.getCategoryById(req.params.id);
+        res.status(200).json(category);
     } catch (err) {
         res.status(500).send(err);
     };
 }
 
-module.exports = { index, show }
+async function habits(req,res) {
+    try {
+        const habits = await Habit.findByCategory(req.params.id);
+        res.status(200).json(habits);
+    } catch (err) {
+        res.status(500).send(err);
+    }
+}
+
+module.exports = { index, show, habits }

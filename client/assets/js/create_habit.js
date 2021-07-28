@@ -158,15 +158,51 @@ function habitFrequencySetup(){
 
         })
     }
-     
+
+    //TODO: code for selecting start date
 
 
+    //TODO: code for submitting data
+    let submitForm = document.querySelectorAll("submit");
+    submitForm.addEventListener("submit", createHabit);
+
+}
+
+async function createHabit(event){
+    event.preventDefault();
+    const data ={
+        habitId: selectedHabitId,
+        frequencyID: habitFrequency,
+        startDate: startDate
+    }
+
+    try{
+        const options = {
+            method: "POST",
+            //TODO: Figure out how to format the data
+            body: JSON.stringify(data),
+            headers:{ "Content-Type": "application/json" }
+        }
+
+        const response = await fetch("http://localhost:3000/user/:id/habits", options);
+        const err = await response.json();
+
+        if(err){
+            throw Error(err);
+        }
+        else{
+            window.location.assign("dashboard.html");
+        }
+    }
+    catch{
+        console.warn(err);
+    }
 }
 
 async function getAllCategories(){
     console.log("here");
     try{
-        const response = await fetch(`http://localhost:3000/category/`);
+        const response = await fetch("http://localhost:3000/category/");
         const data = await response.json();
         return data;
     } catch(err){
@@ -178,7 +214,7 @@ async function getAllCategories(){
 async function getAllHabits(id){
     console.log("here we are");
     try{
-        const response = await fetch(`http://localhost:3000/habit/`);
+        const response = await fetch("http://localhost:3000/habit/");
         const data = await response.json();
         return data;
     } catch(err){
@@ -200,8 +236,10 @@ function hideButtons(object){
     -[x] for every item pull category name add to button
     -[x] hide all category buttons when category selected and show habit
     -[x] Change H1 to say "select a habit and frequency"
-    -[] add event listener to dropdown
-    -[] add event listener for submit button
-    -[] Send data in variables to be added to database   
-    -[] Send back to main page with new item created
+    -[x] add event listener to dropdown
+    -[x] add event listener for submit button
+    -[x] Send data in variables to be added to database   
+    -[x] Send back to main page with new item created
+    -[] add a way for specific start date to be chosen
+    -[] retrieve start date
 */

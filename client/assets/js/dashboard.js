@@ -72,17 +72,39 @@ async function renderHabitToDashboard(uName) {
         }
     }
   }
+
 }
 
 const logOut = document.getElementById('logout');
-logOut.addEventListener('click',() => {
-    logout()
-})
+logOut.addEventListener('click', () => {
+  logout();
+});
 
-function logout(){
-    localStorage.clear();
-    window.location.href = '/login';
+function logout() {
+  localStorage.clear();
+  window.location.href = '/login';
 }
+
+let usernameInLocalStorage = localStorage.getItem('username');
+
+function renderUsernameToDashboard(username) {
+  let parentSection = document.querySelector('#userInfo h2');
+  parentSection.innerText = username;
+}
+
+renderUsernameToDashboard(usernameInLocalStorage);
+console.log(usernameInLocalStorage);
+
+async function fetchUserIdByUsername(uName) {
+  let response = await fetch(`http://localhost:3000/user/${uName}`);
+  let userID = await response.json();
+  //   console.log(userID);
+  let res = await fetch(`http://localhost:3000/user/${userID}/habits`);
+  let userHabitsRetrieved = await res.json();
+  console.log(userHabitsRetrieved);
+}
+
+fetchUserIdByUsername(usernameInLocalStorage);
 
 /*Todo:
     -[x] find each log button

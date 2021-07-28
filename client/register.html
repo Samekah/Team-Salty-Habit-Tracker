@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>Register</title>
+    <title>Habitual - Register</title>
 
     <script defer src="assets/js/register.js"></script>
   </head>
@@ -21,7 +21,6 @@
 
         .logindiv {
             background: #d6daff;
-            opacity: 0.8;
         }
 
         input [type="username"] {
@@ -33,13 +32,21 @@
             border-bottom-right-radius: 0px;
             border-top: 0px;
         }
+
+        #registerb {
+            background-color: #fff6D6;
+            border: 2px solid transparent;
+            color: black;
+        }
+
+        #registerb:hover {
+            border: 2px solid #7278B3;
+        }
+
     </style>
 
-
-
-
-    <div class="logindiv text-center mt-5">
-        <form style="max-width:480px;margin:auto;" id="register">
+    <div class="logindiv text-center mt-5" style="padding-bottom:20px;">
+        <form style="max-width:480px;margin:auto;padding:10px;" id="register">
             <h1 class="h3 mt-4 mb-3 font-weight-normal">Register an Account</h1>
             
             <label for="fname" class="sr-only"></label>
@@ -60,32 +67,15 @@
             <label for="cpassword" class="sr-only"></label>
             <input for="cpassword" type="password" id="cpassword" class="form-control" placeholder="Confirm Password" required autofocus>     
             
-
-
-            <div class="checkbox mt-3">
-                <label>
-                    <input type="checkbox" value="remember-me"> Confirm Details
-                </label>
+            <div class="text-center mt-3">
+                <button type="submit" id="registerb" class="btn btn-lg btn-primary btn-block" disabled>Register</button>
             </div>
-            <div class="mt-3">
-                <button class="btn btn-lg btn-primary btn-block">Register</button>
-            </div>
+
         </form>
-
-
-
 
     </div>
 
-    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
   </body>
 </html>

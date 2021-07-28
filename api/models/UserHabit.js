@@ -24,7 +24,7 @@ class UserHabit {
     static history(id) {
         return new Promise(async (res, rej) => {
         try {
-            let data = await db.query(`SELECT the_date FROM user_habits_history WHERE user_habit_id = $1;`, [id]);
+            let data = await db.query(`SELECT the_date FROM user_habits_history WHERE user_habit_id = $1 ORDER BY the_date;`, [id]);
             let historyList = data.rows.map((r) => r.the_date);
             res(historyList);
         } catch (err) {

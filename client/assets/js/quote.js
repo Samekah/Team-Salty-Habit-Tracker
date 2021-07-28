@@ -1,6 +1,6 @@
 const api_url = 'http://quotes.rest/qod.json';
-async function getQuote(e) {
-  e.preventDefault();
+async function getQuote() {
+  // e.preventDefault();
   try {
     const quote = await fetch(api_url);
     const data = await quote.json();
@@ -22,4 +22,4 @@ function renderQuoteToDashboard(quote) {
   return newQuote;
 }
 
-document.addEventListener('submit', getQuote); //WILL HAVE TO CHANGE WHEN DASHBOARD PROPERLY SET UP.
+getQuote();

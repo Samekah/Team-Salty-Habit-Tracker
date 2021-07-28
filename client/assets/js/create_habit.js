@@ -1,25 +1,27 @@
-let categoryItems = document.querySelectorAll("[id^='category']");
-let selectedHabit;
+let habitHeading = document.querySelector("#instruction");
+let frequency = document.querySelector("#dropdown");
+let submit = document.querySelector("#submitHabit");
+
+frequency.setAttribute("style", "display:none !important"); 
+submit.setAttribute("style", "display:none !important"); 
+console.log(frequency)
+
+let selectedHabitId;
 let habitFrequency;
-let startDate = 
+let startDate; 
 
 window.onload = function(){
     console.log("loaded");
     setup();
 };
 
-// for(let i = 0; i < categoryItems.length; i++){
-    
-//     categoryItems[i].addEventListener("click", ()=>{
-
-//         let categoryTitle =  categoryItems[i].textContent;
-     
-//     }); 
-
-// }
 async function setup(){
+    habitHeading.style.marginLeft ="10px";
+    habitHeading.textContent = "category";
+
     const categoryData = await getAllCategories();
     let sectionToAppend = document.querySelector("#habitForm")
+
     // console.log(categoryData);
     let buttonLength = categoryData.length;
     
@@ -30,18 +32,83 @@ async function setup(){
         categoryButton.value = categoryData[i].id;
 
         let categoryDiv = document.createElement("div");
-        if(((buttonLength - 1)/3 && i === buttonLength-1) || buttonLength === 1){
-            categoryDiv.class = "col-12 d-flex justify-content-center";
+
+        console.log((buttonLength - 1)/3);
+
+        if(((buttonLength - 1)/3 === 1 && i === buttonLength-1) || buttonLength === 1){
+            console.log("hello")
+            categoryDiv.setAttribute("class", "col-12 d-flex justify-content-center")
         }
-        else if (((buttonLength - 2)/3 && i === buttonLength-3) || buttonLength === 1){
-            categoryDiv.class = "col-6 d-flex justify-content-center";
+        else if (((buttonLength - 2)/3  === 1 && i === buttonLength-3) || buttonLength === 2){
+            console.log("hello2")
+            categoryDiv.setAttribute("class", "col-6 d-flex justify-content-center") ;
         }
-        categoryDiv.class = "col d-flex justify-content-center";
-        
+        else{
+            console.log("skipped ifs");
+            categoryDiv.setAttribute("class", "col d-flex justify-content-center");
+        }
 
         categoryDiv.append(categoryButton);
         sectionToAppend.append(categoryDiv);
     }
+
+    let categoryItems = document.querySelectorAll("[id^='category']");
+    console.log(categoryItems);
+    let allHabitData = await getAllHabits();
+    let specificHabitData = [];
+   
+    for(let i = 0; i < categoryItems.length; i++){
+        // console.log("hellooooo");
+        categoryItems[i].addEventListener("click", ()=>{
+            
+            selectedHabitId = categoryItems[i].value;
+            console.log(`it is: ${allHabitData}`);
+            
+            for(const habit of allHabitData){
+                if(habit.category_id == selectedHabitId){
+                    specificHabitData.push(habit);
+                } 
+            }
+            console.log(specificHabitData);
+            habitHeading.textContent = "habit and frequency";
+            hideButtons(categoryItems);
+           
+            buttonLength = specificHabitData.length
+
+            for(let j = 0; j< buttonLength; j++){
+                let habitButton = document.createElement("button");
+                habitButton.textContent = specificHabitData[j].habit_name;
+                habitButton.id = `habit${j+1}`;
+                    
+                let habitDiv = document.createElement("div");
+        
+                     
+                if(((buttonLength - 1)/3 === 1 && j === buttonLength-1) || buttonLength === 1){
+                    console.log("hello")
+                    habitDiv.setAttribute("class", "col-12 d-flex justify-content-center")
+                }
+                else if (((buttonLength - 2)/3  === 1 && j === buttonLength-3) || buttonLength === 2){
+                    console.log("hello2")
+                    habitDiv.setAttribute("class", "col-6 d-flex justify-content-center") ;
+                }
+                else{
+                    console.log("skipped ifs");
+                    habitDiv.setAttribute("class", "col d-flex justify-content-center");
+                }
+        
+                habitDiv.append(habitButton);
+                sectionToAppend.append(habitDiv);
+            }
+            console.log(frequency);
+            frequency.setAttribute("style", "display:flex !important"); 
+            submit.setAttribute("style", "display:flex !important"); 
+        }); 
+
+    }
+
+    let habitItems = document.querySelectorAll("button[id^='habit']");
+    console.log(habitItems);
+
 }
 
 async function getAllCategories(){
@@ -56,13 +123,32 @@ async function getAllCategories(){
 
 }
 
+async function getAllHabits(id){
+    console.log("here we are");
+    try{
+        const response = await fetch(`http://localhost:3000/habit/`);
+        const data = await response.json();
+        return data;
+    } catch(err){
+        console.warn(err);
+    }
+
+}
+
+function hideButtons(object){
+    for(btn of object){
+        btn.style.margin = "0px";
+        btn.style.display = "none";
+    }
+}
+
 /*Todo:
     -[x] find each category button
     -[x] get all categories from db
-    -[] turn JSOn into array
-    -[] for every item pull category name add to button
-    -[] hide all category buttons when category selected and show habit
-    -[] Change H1 to say "select a habit and frequency"
+    -[x] for every item pull category name add to button
+    -[x] hide all category buttons when category selected and show habit
+    -[x] Change H1 to say "select a habit and frequency"
+    -[] add event listener to dropdown
     -[] add event listener for submit button
     -[] Send data in variables to be added to database   
     -[] Send back to main page with new item created

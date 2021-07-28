@@ -142,6 +142,16 @@ function hideButtons(object){
     }
 }
 
+const logOut = document.getElementById('logout');
+logOut.addEventListener('click', () => {
+  logout();
+});
+
+function logout() {
+  localStorage.clear();
+  window.location.href = '/login';
+}
+
 /*Todo:
     -[x] find each category button
     -[x] get all categories from db

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User</title>
+    <title>Habitual - Dashboard</title>
     <link rel="stylesheet" href="assets/css/dashboard_layout.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -31,7 +31,7 @@
       <nav class="navbar justify-content-center navbar-expand-lg navbar-light">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="dashboard.html">[UserName]</a>
+            <a class="nav-link" href="dashboard.html">[Dashboard]</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="logout" href="#">[Logout]</a>
@@ -41,19 +41,25 @@
     </header>
     <div id="content">
       <section id="userInfo" class="container">
-        <img src="#" alt="default profile image" />
+        <img src="assets/img/account-avatar.png" alt="default profile image" />
         <button><a href="settings.html">Settings</a></button>
+        <h2>Username</h2>
       </section>
 
-      <section id="quote" class="container"></section>
+      <section id="quote" class="container">
+          <h2>Quote Loading...</h2>
+      </section>
 
       <section id="habitSection" class="container">
         <section id="habitInfo">
           <h2>Your habits</h2>
           <button><a href="create_habit.html">Add a habit</a></button>
-          <br />
+          <hr />
           <section id="habits">
-            <div class="habitItem" style="border: 2px solid red">
+            <div class="habitItem">
+                No Habits Set To Be Tracked
+            </div>
+            <!-- <div class="habitItem" style="border: 2px solid red">
               <h4 id="habitTitle1">This is the first habit</h4>
               <button id="updateStreak1">+</button>
               <p>habit streak is: <span id="habitstreak1">0 </span><img id="streakImage" src="#" alt="star/flame" /></p>
@@ -67,7 +73,7 @@
               <h4 id="habitTitle3">This is the second habit</h4>
               <button id="updateStreak3">+</button>
               <p>habit streak is: <span id="habitstreak3">0 </span><img id="streakImage" src="#" alt="star/flame" /></p>
-            </div>
+            </div> -->
           </section>
         </section>
       </section>

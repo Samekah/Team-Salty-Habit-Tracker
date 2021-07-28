@@ -12,9 +12,9 @@ async function index(req, res) {
 
 async function show(req, res) {
     try {
-        const users = await User.findById(req.params.id);
-        const habits = await user.habits;
-        res.status(200).json({ ...user, habits });
+        const user = await User.findUserByUsername(req.params.username);
+        console.log(user)
+        res.status(200).json(user.id);
     } catch (err) {
         res.status(500).send(err);
     };

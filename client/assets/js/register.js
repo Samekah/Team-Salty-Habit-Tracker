@@ -4,7 +4,7 @@ form.addEventListener('submit', register);
 async function register(e) {
     e.preventDefault();
 
-    if (e.target.password.value !== e.target.rpassword.value) {
+    if (e.target.password.value !== e.target.cpassword.value) {
         alert('Passwords Do Not Match!');
         return
     }
@@ -16,6 +16,8 @@ async function register(e) {
         last_name: e.target.lname.value,
         email: e.target.email.value,
     };
+
+    console.log(userData)
 
     try {
         const options = { 

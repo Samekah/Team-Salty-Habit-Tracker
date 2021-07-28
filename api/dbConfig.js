@@ -1,5 +1,20 @@
 const { Pool } = require("pg");
 
-const pool = new Pool();
+const env = process.env.NODE_ENV || 'development';
+
+let connectionString = {
+    user: process.env.PGUSER,
+    database: process.env.PGDATABASE,
+    host: process.env.PGHOST
+};
+
+if (env !== 'development') {
+    connectionString = {
+        connectionString: process.env.DATABASE_URL,
+        ssl: true
+    };
+};
+
+const pool = new Pool(connectionString);
 
 module.exports = pool;

@@ -2,8 +2,14 @@
     box-sizing: border-box;
 }
 
+
+:root{
+    --btn-cream: #FFE3BD;
+}
+
 /* move to style css */
 button[id ^= "category"], button[id^='habit']{
+    background-color: var( --btn-cream);
     padding: 20px;
     text-align: center;
     text-decoration: none;

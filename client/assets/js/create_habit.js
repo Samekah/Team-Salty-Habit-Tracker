@@ -78,6 +78,7 @@ async function setup(){
             for(let j = 0; j< buttonLength; j++){
                 let habitButton = document.createElement("button");
                 habitButton.textContent = specificHabitData[j].habit_name;
+                habitButton.value = 0;
                 habitButton.id = `habit${j+1}`;
                     
                 let habitDiv = document.createElement("div");
@@ -102,12 +103,63 @@ async function setup(){
             console.log(frequency);
             frequency.setAttribute("style", "display:flex !important"); 
             submit.setAttribute("style", "display:flex !important"); 
+            habitFrequencySetup();
         }); 
 
     }
+}
+
+function habitFrequencySetup(){
 
     let habitItems = document.querySelectorAll("button[id^='habit']");
     console.log(habitItems);
+
+    for(let i = 0; i < habitItems.length; i++){
+        habitItems[i].addEventListener("click", ()=>{
+            let btnState = habitItems[i].value;
+            let btncolor;
+            
+
+            switch(btnState){
+                case "0":
+                    btncolor = "green";
+                    btnState = 1;
+                    break;
+                case "1":
+                    btncolor = "#FFE3BD";
+                    btnState = 0;
+                    break;
+            }
+
+            // console.log(btnState);
+            // console.log(btncolor);
+
+            habitItems[i].value = btnState;
+            habitItems[i].setAttribute("style", `background-color:${btncolor}`); 
+
+        })
+    }
+
+    let dropdownItems = document.querySelectorAll(".dropdown-item");
+    console.log(dropdownItems);
+
+    for(let j = 0; j < dropdownItems.length; j++){
+
+        dropdownItems[j].addEventListener("click", ()=>{
+
+            let interval = dropdownItems[j].textContent
+            habitFrequency = interval;
+            console.log(`the frequency is ${habitFrequency}`);
+
+            let dropdownWindow = document.querySelector("#dWindow");
+            console.log(dropdownWindow);
+
+            dropdownWindow.textContent = interval;
+
+        })
+    }
+     
+
 
 }
 

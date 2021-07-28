@@ -1,0 +1,32 @@
+*{
+    box-sizing: border-box;
+}
+
+/* move to style css */
+button[id ^= "category"]{
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    width: 10em;
+    height: 10em;
+    border-radius: 50% !important;
+}
+
+[class ^= "col"], #dropdown{
+    margin: 25px 0px !important;
+    
+}
+
+#submit{
+    margin-bottom: 15px;
+}
+
+#content{
+    margin-top: 40px !important;
+
+}
+
+#createHabit, #dropdown{
+    display:none !important;
+}

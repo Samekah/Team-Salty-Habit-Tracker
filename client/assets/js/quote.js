@@ -14,7 +14,7 @@ async function getQuote() {
 }
 
 function renderQuoteToDashboard(quote) {
-  const sectionId = document.querySelector('#quote');
+  const sectionId = document.querySelector('#quote h2');
   newQuote = document.createElement('h2');
   newQuote.textContent = '"' + quote + '"';
   sectionId.appendChild(newQuote);

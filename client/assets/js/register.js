@@ -82,3 +82,24 @@ function jwt_decode (token) {
 
     return JSON.parse(jsonPayload);
 };
+
+const submitButton = document.querySelector('#registerb')
+const fName = document.querySelector('#fname');
+const lName = document.querySelector('#lname');
+const email = document.querySelector('#email');
+const username = document.querySelector('#username');
+const password = document.querySelector('#password');
+const cpassword = document.querySelector('#cpassword');
+
+form.addEventListener('input',() => {
+    if(fName.value === "" || 
+        lName.value === "" || 
+        email.value === "" || 
+        username.value === "" || 
+        password.value === "" || 
+        cpassword.value === "") {
+            submitButton.disabled=true
+    } else {
+        submitButton.disabled=false
+    }
+})

@@ -3,7 +3,7 @@
 }
 
 /* move to style css */
-button[id ^= "category"]{
+button[id ^= "category"], button[id^='habit']{
     padding: 20px;
     text-align: center;
     text-decoration: none;
@@ -24,9 +24,6 @@ button[id ^= "category"]{
 
 #content{
     margin-top: 40px !important;
+    padding-top: 30px;
 
-}
-
-#createHabit, #dropdown{
-    display:none !important;
 }

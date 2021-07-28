@@ -8,7 +8,7 @@ const { authenticateToken } = require('../middleware/auth');
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 
-const User = require('../models/user');
+const User = require('../models/User');
 
 router.get('/', authenticateToken, (req,res) => {
     try {

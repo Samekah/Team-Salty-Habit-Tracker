@@ -44,10 +44,8 @@ function logout() {
 let usernameInLocalStorage = localStorage.getItem('username');
 
 function renderUsernameToDashboard(username) {
-  let parentSection = document.querySelector('#userInfo');
-  let UsernameH1 = document.createElement('H1');
-  UsernameH1.textContent = username;
-  parentSection.appendChild(UsernameH1);
+  let parentSection = document.querySelector('#userInfo h2');
+  parentSection.innerText = username;
 }
 
 renderUsernameToDashboard(usernameInLocalStorage);

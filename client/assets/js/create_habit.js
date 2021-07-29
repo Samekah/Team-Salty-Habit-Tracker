@@ -61,11 +61,11 @@ async function setup(){
         // console.log("hellooooo");
         categoryItems[i].addEventListener("click", ()=>{
             
-            selectedHabitId = categoryItems[i].value;
+            selectedCategoryId = categoryItems[i].value;
             console.log(`it is: ${allHabitData}`);
             
             for(const habit of allHabitData){
-                if(habit.category_id == selectedHabitId){
+                if(habit.category_id == selectedCategoryId){
                     specificHabitData.push(habit);
                 } 
             }
@@ -79,7 +79,7 @@ async function setup(){
                 let habitButton = document.createElement("button");
                 habitButton.textContent = specificHabitData[j].habit_name;
                 habitButton.value = 0;
-                habitButton.id = `habit${j+1}`;
+                habitButton.id = `habit${specificHabitData[j].id}`;
                     
                 let habitDiv = document.createElement("div");
         
@@ -118,7 +118,8 @@ async function habitFrequencySetup(){
         habitItems[i].addEventListener("click", ()=>{
             let btnState = habitItems[i].value;
             let btncolor;
-            
+            let btnHabitId = habitItems[i].id.split("habit")[1];
+            console.log(btnHabitId);
 
             switch(btnState){
                 case "0":
@@ -136,11 +137,10 @@ async function habitFrequencySetup(){
 
             habitItems[i].value = btnState;
             habitItems[i].setAttribute("style", `background-color:${btncolor}`); 
-
+            selectedHabitId = btnHabitId;
         })
     }
 
-    //TODO: pull frequencies from db
     const frequencyData = await getAllfrequencies();
     let listToAppend = document.querySelector("#frequencyItems")
 
@@ -168,7 +168,7 @@ async function habitFrequencySetup(){
         dropdownItems[j].addEventListener("click", ()=>{
 
             let interval = dropdownItems[j].textContent
-            habitFrequency = interval;
+            habitFrequency = dropdownItems[j].id;
             console.log(`the frequency is ${habitFrequency}`);
 
             let dropdownWindow = document.querySelector("#dWindow");
@@ -182,8 +182,7 @@ async function habitFrequencySetup(){
     //TODO: code for selecting start date
 
 
-    //TODO: code for submitting data
-    let submitForm = document.querySelector("submit");
+    let submitForm = document.querySelector("#submit");
     submitForm.addEventListener("submit", createHabit);
 
 }

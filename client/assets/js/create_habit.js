@@ -109,7 +109,7 @@ async function setup(){
     }
 }
 
-function habitFrequencySetup(){
+async function habitFrequencySetup(){
 
     let habitItems = document.querySelectorAll("button[id^='habit']");
     console.log(habitItems);
@@ -140,6 +140,26 @@ function habitFrequencySetup(){
         })
     }
 
+    //TODO: pull frequencies from db
+    const frequencyData = await getAllfrequencies();
+    let listToAppend = document.querySelector("#frequencyItems")
+
+    console.log(`button list: ${listToAppend}`)
+
+    for(k = 0; k < frequencyData.length; k++){
+        let listItem = document.createElement("li");
+        let listLink = document.createElement("a");
+        
+        listLink.setAttribute("class", "dropdown-item")
+        listLink.id = `${frequencyData[k].id}`;
+
+        listLink.textContent = frequencyData[k].frequency;
+        listItem.append(listLink);
+
+        listToAppend.append(listItem);
+
+    }
+
     let dropdownItems = document.querySelectorAll(".dropdown-item");
     console.log(dropdownItems);
 
@@ -163,7 +183,7 @@ function habitFrequencySetup(){
 
 
     //TODO: code for submitting data
-    let submitForm = document.querySelectorAll("submit");
+    let submitForm = document.querySelector("submit");
     submitForm.addEventListener("submit", createHabit);
 
 }
@@ -209,6 +229,16 @@ async function getAllCategories(){
         console.warn(err);
     }
 
+}
+
+async function getAllfrequencies(){
+    try{
+        const response = await fetch("http://localhost:3000/habit/frequency ");
+        const data = await response.json();
+        return data;
+    } catch(err){
+        console.warn(err);
+    }
 }
 
 async function getAllHabits(id){

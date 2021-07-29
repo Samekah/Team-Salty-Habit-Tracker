@@ -1,3 +1,6 @@
+//const authApiUrl = 'https://habitual-2021.herokuapp.com';
+const authApiUrl = 'http://localhost:3000';
+
 authoriseUser();
 
 async function authoriseUser(){
@@ -8,14 +11,11 @@ async function authoriseUser(){
         const options = {
             headers: new Headers({'Authorization': localStorage.getItem('token')}),
         }
-
-        console.log(options);
     
-        const response = await fetch('http://localhost:3000/auth', options)
+        const response = await fetch(`${authApiUrl}/auth`, options)
         const data = await response.json()
-        console.log(data);
     
-        if(data.message == "Token missing") {
+        if(data.message == "Token missing" || data.err == "Invalid token") {
             logout();
         }
         return data;

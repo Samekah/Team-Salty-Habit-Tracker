@@ -137,11 +137,13 @@ async function habitFrequencySetup(){
                     break;
             }
 
-            // console.log(btnState);
+            console.log(`state is":${btnState}`);
             // console.log(btncolor);
 
             habitItems[i].value = btnState;
+            buttonStates(btnHabitId,btnState,habitItems);
             habitItems[i].setAttribute("style", `background-color:${btncolor}`); 
+
             selectedHabitId = btnHabitId;
         })
     }
@@ -200,7 +202,7 @@ async function createHabit(event){
     console.log(user);
     const data ={
         habitId: selectedHabitId,
-        frequencyID: habitFrequency,
+        frequencyId: habitFrequency,
         startDate: selectedDate.value
     }
 
@@ -218,15 +220,15 @@ async function createHabit(event){
         const err = await response.json();
         console.log(err);
 
-        if(err){
+        if(!err){
             throw Error(err);
         }
         else{
-            console("No errors")
+            console.log("No errors")
             window.location.assign("dashboard.html");
         }
     }
-    catch{
+    catch(err){
         console.warn(err);
     }
 }
@@ -276,6 +278,32 @@ function hideButtons(object){
         btn.style.margin = "0px";
         btn.style.display = "none";
     }
+}
+
+function buttonStates(id,state,object){
+    let clickable;
+    switch(state){
+        case 1:
+            clickable = true;
+            break;
+        case 0:
+            clickable = false;
+            break;
+    }
+
+    console.log(`clickable is ${clickable}`);
+
+    for(btn of object){
+        
+        if(btn.id.endsWith(id)){
+          
+        }
+        else{
+            btn.disabled = clickable; 
+            console.log(btn.disabled)
+        }         
+    }
+
 }
 
 const logOut = document.getElementById('logout');

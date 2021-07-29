@@ -25,6 +25,7 @@ button[id ^= "category"], button[id^='habit']{
 }
 
 #submit{
+    margin-top: 20px;
     margin-bottom: 15px;
 }
 
@@ -32,4 +33,8 @@ button[id ^= "category"], button[id^='habit']{
     margin-top: 40px !important;
     padding-top: 30px;
 
+}
+
+#startDate{
+    margin-left: 15px;
 }

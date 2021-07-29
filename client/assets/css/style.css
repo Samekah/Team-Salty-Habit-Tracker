@@ -28,6 +28,16 @@ div.register {
 form#register {
     margin: 100px;
 } */
+:root{
+    --btn-cream: #FFE3BD;
+    --btn-font-color: #7278B3;
+    --background: #D6DAFF;
+    --section-background:#FFF6D6;
+    --link-highlight: #0D22EE;
+    --border-colour: #B3A884;
+    --section-highlight: #FFFCF0;
+
+}
 
 .splash {
     position: fixed;

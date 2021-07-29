@@ -1,8 +1,28 @@
+//const baseApiUrl = 'https://habitual-2021.herokuapp.com';
+const baseApiUrl = 'http://localhost:3000';
+
 const form = document.getElementById('register');
 form.addEventListener('submit', register);
 
 async function register(e) {
     e.preventDefault();
+
+    let resFName = /^[a-zA-Z]+$/.test(e.target.fname.value);
+    if (!resFName) {
+        alert('First Name cannot contain numbers or special characters');
+        return
+    }
+
+    let resLName = /^[a-zA-Z]+$/.test(e.target.lname.value);
+    if (!resLName) {
+        alert('Last Name cannot contain numbers or special characters');
+        return
+    }
+
+    if (e.target.password.value.length < 6) {
+        alert('Password Must Be 6 Characters Minimum!');
+        return
+    }
 
     if (e.target.password.value !== e.target.cpassword.value) {
         alert('Passwords Do Not Match!');
@@ -17,8 +37,6 @@ async function register(e) {
         email: e.target.email.value,
     };
 
-    console.log(userData)
-
     try {
         const options = { 
             method: 'POST',
@@ -26,7 +44,7 @@ async function register(e) {
             headers: { "Content-Type": "application/json" }
         };
     
-        const response = await fetch('http://localhost:3000/auth/register', options)
+        const response = await fetch(`${baseApiUrl}/auth/register`, options)
         const { user, err } = await response.json()
         if(err) {
             throw Error(err)
@@ -55,7 +73,7 @@ async function logUserIn(username,password) {
             headers: { "Content-Type": "application/json" }
         };
 
-        const response = await fetch('http://localhost:3000/auth/login', options)
+        const response = await fetch(`${baseApiUrl}/auth/login`, options)
         const data = await response.json()
         if (!data.success) {
             throw new Error('User Not Authorised');

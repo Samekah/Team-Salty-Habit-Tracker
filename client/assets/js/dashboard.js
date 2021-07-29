@@ -5,7 +5,7 @@ const usernameInLocalStorage = localStorage.getItem('username');
 let logoutButton
 function load() {
   console.log('load is seen');
-  renderHabitToDashboard(usernameInLocalStorage);
+  fetchHabitToDashboard(usernameInLocalStorage);
   renderUsernameToDashboard(usernameInLocalStorage);
   logoutButton = document.getElementById('logout');
   logoutButton.addEventListener('click', () => {
@@ -26,11 +26,14 @@ function renderUsernameToDashboard(username) {
   parentSection.appendChild(UsernameH1);
 }
 
-async function renderHabitToDashboard(uName) {
+async function fetchHabitToDashboard(uName) {
 
-  let userID = await fetchUserIDByUsername(uName);
+  // let userID = await fetchUserIDByUsername(uName);
   let data = await fetchUserHabitsByUsername(uName);
+  renderHabitToDashboard(data)
+}
 
+function renderHabitToDashboard(data) {
   for (let i = 0; i < data.length; i++) {
 
     let userHabitID = data[i].id;
@@ -43,7 +46,7 @@ async function renderHabitToDashboard(uName) {
 
     divForHabit.classList.add('habitItem');
     buttonForHabit.id = `updateStreak-${userHabitID}`;
-    spanForPara.id = `habitstreak-${userHabitID}`;
+    spanForPara.id = `habitStreak-${userHabitID}`;
     h4ForHabitTitle.textContent = data[i].habit;
     paraForHabit.textContent = 'habit streak is: ';
     
@@ -138,7 +141,8 @@ async function fetchUserHabitsByUsername(uName) {
 }
 
 try {
-  module.exports = {renderUsernameToDashboard}
+  module.exports = {renderUsernameToDashboard, renderHabitToDashboard}
 } catch (error) {
  console.log('running in browser') 
 } 
+

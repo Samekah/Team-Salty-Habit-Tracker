@@ -42,14 +42,26 @@ describe('dashboard.html elements', () => {
 describe('dashboard helper fucntion', () => {
     beforeAll(() => {
         document.documentElement.innerHTML = homeHtml.toString();
-
-
     })
+
     test("renderUsernameToDashboard displays the username in H1",() => {
         dashboardHelpers.renderUsernameToDashboard("raf")
         const newH1 = document.querySelector('#userInfo h1')
         expect(newH1).toBeTruthy();
         expect(newH1.textContent).toContain('raf');
-
     })
+
+    test("renderHabitToDashboard renders habit to DOM",() => {
+        let fakeData = [{
+            id:1,
+            habit:"drink water",
+            history:[]
+        }]
+        dashboardHelpers.renderHabitToDashboard(fakeData)
+        let updateButton = document.querySelector("#updateStreak-1")
+        expect(updateButton).toBeTruthy();
+        let streak = document.querySelector("#habitStreak-1")
+        expect(streak.textContent).toBe("0");
+    })
+
 })

@@ -147,7 +147,7 @@ async function habitFrequencySetup(){
             selectedHabitId = btnHabitId;
         })
     }
-    //TODO: code for selecting start date
+   
     let todaysDate =  new Date().toISOString().split("T")[0]
     selectedDate.min = todaysDate;
     selectedDate.value = todaysDate;
@@ -198,38 +198,44 @@ async function habitFrequencySetup(){
 
 async function createHabit(event){
     event.preventDefault();
-    let user = await fetchUserIDByUsername(localStorage.getItem("username"))
-    console.log(user);
-    const data ={
-        habitId: selectedHabitId,
-        frequencyId: habitFrequency,
-        startDate: selectedDate.value
+    
+    if(!habitFrequency){
+        alert("Please select a frequency for your habit!")
     }
-
-    console.log(data)
-
-    try{
-        const options = {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers:{ "Content-Type": "application/json" }
+    else{
+        let user = await fetchUserIDByUsername(localStorage.getItem("username"))
+        console.log(user);
+        const data ={
+            habitId: selectedHabitId,
+            frequencyId: habitFrequency,
+            startDate: selectedDate.value
         }
 
-        const response = await fetch(`http://localhost:3000/user/${user}/habits`, options);
-        console.log(response);
-        const err = await response.json();
-        console.log(err);
+        console.log(data)
 
-        if(!err){
-            throw Error(err);
+        try{
+            const options = {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers:{ "Content-Type": "application/json" }
+            }
+
+            const response = await fetch(`http://localhost:3000/user/${user}/habits`, options);
+            console.log(response);
+            const err = await response.json();
+            console.log(err);
+
+            if(!err){
+                throw Error(err);
+            }
+            else{
+                console.log("No errors")
+                window.location.assign("dashboard.html");
+            }
         }
-        else{
-            console.log("No errors")
-            window.location.assign("dashboard.html");
+        catch(err){
+            console.warn(err);
         }
-    }
-    catch(err){
-        console.warn(err);
     }
 }
 

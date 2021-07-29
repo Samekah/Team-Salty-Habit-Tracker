@@ -26,7 +26,7 @@ async function register(e) {
             headers: { "Content-Type": "application/json" }
         };
     
-        const response = await fetch('http://localhost:3000/auth/register', options)
+        const response = await fetch('https://habitual-2021.herokuapp.com/auth/register', options)
         const { user, err } = await response.json()
         if(err) {
             throw Error(err)

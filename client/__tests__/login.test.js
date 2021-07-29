@@ -14,17 +14,17 @@ describe('dashboard.html elements', () => {
         let body = document.querySelector('body');
         expect(body).toBeTruthy();
     })
-    test('There is a header', () => {
-        let header = document.querySelector('header');
-        expect(header).toBeTruthy();
+    test('There is a h1', () => {
+        let h1 = document.querySelector('h1');
+        expect(h1).toBeTruthy();
     })
-    test('There is a Navbar', () => {
+    test('There is no Navbar', () => {
         let navBar = document.querySelector('nav');
-        expect(navBar).toBeTruthy();
+        expect(navBar).toBeFalsy();
     })
-    test('There is a main', () => {
-        let main = document.querySelector('main');
-        expect(main).toBeTruthy();
+    test('There is a div', () => {
+        let div = document.querySelector('div');
+        expect(div).toBeTruthy();
     })
     test("There is a Favicon", () => {
         let favicon = document.querySelector("link[rel = 'icon']");

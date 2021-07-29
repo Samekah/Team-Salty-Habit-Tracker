@@ -24,9 +24,9 @@ describe('dashboard.html elements', () => {
         let navBar = document.querySelector('nav');
         expect(navBar).toBeTruthy();
     })
-    test('There is a main', () => {
-        let main = document.querySelector('main');
-        expect(main).toBeTruthy();
+    test('There is a section', () => {
+        let section = document.querySelector('section');
+        expect(section).toBeTruthy();
     })
     test("There is a Favicon", () => {
         let favicon = document.querySelector("link[rel = 'icon']");
@@ -64,4 +64,50 @@ describe('dashboard helper fucntion', () => {
         expect(streak.textContent).toBe("0");
     })
 
+    test("renderHabitToDashboard disables button if history has current date", () => {
+        let fakeData = [{
+            id:2,
+            habit:"skincare",
+            history:["2021-07-28", "2021-07-29"]
+        }]
+        dashboardHelpers.renderHabitToDashboard(fakeData)
+        let updateButton = document.querySelector("#updateStreak-2")
+        expect(updateButton.disabled).toBeTruthy();
+    })
+
+    test("renderHabitToDashboard enables button if history doesnt have current date", () => {
+        let fakeData = [{
+            id:3,
+            habit:"run",
+            history:["2021-07-27", "2021-07-28"]
+        }]
+        dashboardHelpers.renderHabitToDashboard(fakeData)
+        let updateButton = document.querySelector("#updateStreak-3")
+        expect(updateButton.disabled).toBeFalsy();
+
+    })
+
+
+    // change date tomorrow when testing for presentation
+    test("renderHabitToDashboard start streak if history has current date only", () => {
+        let fakeData = [{
+            id:4,
+            habit:"jog",
+            history:["2021-07-29"]
+        }]
+        dashboardHelpers.renderHabitToDashboard(fakeData)
+        let streak = document.querySelector("#habitStreak-4")
+        expect(streak.textContent).toBe("1");
+    })
+
+    test("renderHabitToDashboard start streak if history has current date only", () => {
+        let fakeData = [{
+            id:5,
+            habit:"shower",
+            history:["2021-07-27", "2021-07-28", "2021-07-29"]
+        }]
+        dashboardHelpers.renderHabitToDashboard(fakeData)
+        let streak = document.querySelector("#habitStreak-5")
+        expect(streak.textContent).toBe("3");
+    })
 })

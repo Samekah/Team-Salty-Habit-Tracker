@@ -2,14 +2,17 @@
 const baseApiUrl = 'http://localhost:3000';
 
 const usernameInLocalStorage = localStorage.getItem('username');
+let logoutButton
+function load() {
+  console.log('load is seen');
+  renderHabitToDashboard(usernameInLocalStorage);
+  renderUsernameToDashboard(usernameInLocalStorage);
+  logoutButton = document.getElementById('logout');
+  logoutButton.addEventListener('click', () => {
+    logout();
+  });
+}
 
-renderHabitToDashboard(usernameInLocalStorage);
-renderUsernameToDashboard(usernameInLocalStorage);
-
-const logOut = document.getElementById('logout');
-logOut.addEventListener('click', () => {
-  logout();
-});
 
 function logout() {
   localStorage.clear();
@@ -133,3 +136,9 @@ async function fetchUserHabitsByUsername(uName) {
   let userHabitsRetrieved = await res.json();
   return userHabitsRetrieved;
 }
+
+try {
+  module.exports = {renderUsernameToDashboard}
+} catch (error) {
+ console.log('running in browser') 
+} 

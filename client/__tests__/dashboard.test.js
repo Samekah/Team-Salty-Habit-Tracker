@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const homeHtml = fs.readFileSync(path.resolve(__dirname, '../dashboard.html'), 'utf8');
+const dashboardHelpers = require('../assets/js/dashboard');
+
 
 describe('dashboard.html elements', () => {
     beforeAll(() => {
@@ -34,5 +36,20 @@ describe('dashboard.html elements', () => {
         let favicon = document.querySelector("link[rel = 'icon']")
         let faviconImage = favicon.getAttribute("href");
         expect(faviconImage).not.toBe("#")
+    })
+})
+
+describe('dashboard helper fucntion', () => {
+    beforeAll(() => {
+        document.documentElement.innerHTML = homeHtml.toString();
+
+
+    })
+    test("renderUsernameToDashboard displays the username in H1",() => {
+        dashboardHelpers.renderUsernameToDashboard("raf")
+        const newH1 = document.querySelector('#userInfo h1')
+        expect(newH1).toBeTruthy();
+        expect(newH1.textContent).toContain('raf');
+
     })
 })

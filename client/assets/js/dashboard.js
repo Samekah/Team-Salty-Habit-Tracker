@@ -2,14 +2,17 @@
 const baseApiUrl = 'http://localhost:3000';
 
 const usernameInLocalStorage = localStorage.getItem('username');
+let logoutButton
+function load() {
+  console.log('load is seen');
+  fetchHabitToDashboard(usernameInLocalStorage);
+  renderUsernameToDashboard(usernameInLocalStorage);
+  logoutButton = document.getElementById('logout');
+  logoutButton.addEventListener('click', () => {
+    logout();
+  });
+}
 
-renderHabitToDashboard(usernameInLocalStorage);
-renderUsernameToDashboard(usernameInLocalStorage);
-
-const logOut = document.getElementById('logout');
-logOut.addEventListener('click', () => {
-  logout();
-});
 
 function logout() {
   localStorage.clear();
@@ -23,11 +26,14 @@ function renderUsernameToDashboard(username) {
   parentSection.appendChild(UsernameH1);
 }
 
-async function renderHabitToDashboard(uName) {
+async function fetchHabitToDashboard(uName) {
 
-  let userID = await fetchUserIDByUsername(uName);
+  // let userID = await fetchUserIDByUsername(uName);
   let data = await fetchUserHabitsByUsername(uName);
+  renderHabitToDashboard(data)
+}
 
+function renderHabitToDashboard(data) {
   for (let i = 0; i < data.length; i++) {
 
     let userHabitID = data[i].id;
@@ -40,7 +46,7 @@ async function renderHabitToDashboard(uName) {
 
     divForHabit.classList.add('habitItem');
     buttonForHabit.id = `updateStreak-${userHabitID}`;
-    spanForPara.id = `habitstreak-${userHabitID}`;
+    spanForPara.id = `habitStreak-${userHabitID}`;
     h4ForHabitTitle.textContent = data[i].habit;
     paraForHabit.textContent = 'habit streak is: ';
     
@@ -133,3 +139,10 @@ async function fetchUserHabitsByUsername(uName) {
   let userHabitsRetrieved = await res.json();
   return userHabitsRetrieved;
 }
+
+try {
+  module.exports = {renderUsernameToDashboard, renderHabitToDashboard}
+} catch (error) {
+ console.log('running in browser') 
+} 
+

@@ -1,8 +1,6 @@
 let habitTrack = document.querySelectorAll("[id^='updateStreak']");
 let habitStreakTrack = new Array(habitTrack.length);
 
-let habitTrack = document.querySelectorAll("[id^='updateStreak']");
-let habitStreakTrack = new Array(habitTrack.length);
 let usernameInLocalStorage = localStorage.getItem('username');
 window.onload = function () {
   console.log('loaded');
@@ -44,8 +42,10 @@ async function fetchUserIdByUsername(uName) {
   return userHabitsRetrieved;
 }
 async function renderHabitToDashboard(uName) {
-  let data = await fetchUserIdByUsername(uName);
-    let counter = 0;
+  let userID = await fetchUserIDByUsername(uName);
+  let data = await fetchUserHabitsByUsername(uName);
+  // console.log(data);
+  let counter = 0;
   for (let i = 0; i < data.length; i++) {
     let divForHabit = document.createElement('div');
     let h4ForHabitTitle = document.createElement('h4');
@@ -53,70 +53,81 @@ async function renderHabitToDashboard(uName) {
     let paraForHabit = document.createElement('p');
     let spanForPara = document.createElement('span');
     divForHabit.setAttribute('class', 'habitItem');
-    buttonForHabit.id = `updateStreak${i}`;
+    buttonForHabit.id = `updateStreak-${data[i].id}`;
     spanForPara.id = `habitstreak${i}`;
     h4ForHabitTitle.textContent = data[i].habit;
     paraForHabit.textContent = 'habit streak is:';
+    let userHabitID = data[i].id;
     buttonForHabit.textContent = '+';
+    let currentDate = new Date().toISOString().split('T')[0];
+    let historyArr = data[i].history.map((item) => item.split('T')[0]);
+    if (historyArr.includes(currentDate)) {
+      //DATE COMPARISON
+      buttonForHabit.disabled = true;
+    } else {
+      // console.log(historyArr.includes(currentDate));
+      buttonForHabit.disabled = false;
+    }
+    buttonForHabit.addEventListener('click', streakUpdate);
     let overallSection = document.querySelector('#habits');
     overallSection.appendChild(h4ForHabitTitle);
     overallSection.appendChild(buttonForHabit);
     overallSection.appendChild(paraForHabit);
     paraForHabit.appendChild(spanForPara);
-    if (data.history === []){
-        spanForPara.textContent = '0';
+    if (data[i].history.length === 0) {
+      spanForPara.textContent = '0';
+    } else if (data[i].history.length === 1 && currentDate == data[i].history[0].split('T')[0]) {
+      spanForPara.textContent = '1';
     } else {
-        let date = new Date();
-        date = date.toISOString().split('-')[0];
-        if(){
+      const oneDay = 24 * 60 * 60 * 1000;
+      for (let j = 0; j < data[i].history.length - 1; j++) {
+        let dateUnformatted1 = data[i].history[j];
+        let dateUnformatted2 = data[i].history[j + 1];
+        let dateSemiformatted1 = dateUnformatted1.split('T');
+        let dateSemiformatted2 = dateUnformatted2.split('T');
+        let dateArray1 = dateSemiformatted1[0].split('-');
+        let dateArray2 = dateSemiformatted2[0].split('-');
+        let dateFormatted1 = new Date(dateArray1[0], dateArray1[1], dateArray1[2]);
+        let dateFormatted2 = new Date(dateArray2[0], dateArray2[1], dateArray2[2]);
+        const diffDays = Math.round(Math.abs((dateFormatted2 - dateFormatted1) / oneDay));
+
+        if (diffDays === 1 || data[i].history.length === 1) {
+          counter++;
+          spanForPara.textContent = counter;
+        } else {
+          counter = 0;
+          spanForPara.textContent = '0';
         }
+      }
     }
   }
-
 }
 
-const logOut = document.getElementById('logout');
-logOut.addEventListener('click', () => {
-  logout();
-});
+async function streakUpdate(e) {
+  e.preventDefault();
+  let userHabitID = e.target.id.split('-')[1];
+  let options = {
+    method: 'POST',
+    header: { 'Content-Length': 0 },
+  };
 
-function logout() {
-  localStorage.clear();
-  window.location.href = '/login';
+  let userid = await fetchUserIDByUsername(usernameInLocalStorage);
+  console.log(userid);
+  let streakData = await fetch(`http://localhost:3000/user/${userid}/habits/${userHabitID}`, options);
+  let { err } = await streakData.json();
 }
 
-let usernameInLocalStorage = localStorage.getItem('username');
-
-function renderUsernameToDashboard(username) {
-  let parentSection = document.querySelector('#userInfo h2');
-  parentSection.innerText = username;
+async function fetchUserIDByUsername(uName) {
+  let response = await fetch(`http://localhost:3000/user/${uName}`);
+  let userID = await response.json();
+  return userID;
 }
 
-renderUsernameToDashboard(usernameInLocalStorage);
-console.log(usernameInLocalStorage);
-
-async function fetchUserIdByUsername(uName) {
+async function fetchUserHabitsByUsername(uName) {
   let response = await fetch(`http://localhost:3000/user/${uName}`);
   let userID = await response.json();
   //   console.log(userID);
   let res = await fetch(`http://localhost:3000/user/${userID}/habits`);
   let userHabitsRetrieved = await res.json();
-  console.log(userHabitsRetrieved);
+  return userHabitsRetrieved;
 }
-
-fetchUserIdByUsername(usernameInLocalStorage);
-
-/*Todo:
-    -[x] find each log button
-    -[x] add events to each button
-    -[x] find habit title from log button
-    -[x] figure out how to increase streak value
-    -[] find the habit based on habit name
-    -[] log that a habit has been done
-    -[] update to check if it is consecutive:
-        -[] if it is increase the value of the streak
-        -[] if not set streak to 1
-    -[] Pull data from database
-    -[] If at a certain time if the log button isnt disabled - log no item + set streak to 0
-    -[] on page load get data from database
-*/

@@ -1,9 +1,13 @@
 let habitHeading = document.querySelector("#instruction");
 let frequency = document.querySelector("#dropdown");
 let submit = document.querySelector("#submitHabit");
+let date = document.querySelector("#submitStartDate");
+let selectedDate = document.querySelector("#startDate");
 
 frequency.setAttribute("style", "display:none !important"); 
 submit.setAttribute("style", "display:none !important"); 
+date.setAttribute("style", "display:none !important");
+
 console.log(frequency)
 
 let selectedHabitId;
@@ -103,6 +107,7 @@ async function setup(){
             console.log(frequency);
             frequency.setAttribute("style", "display:flex !important"); 
             submit.setAttribute("style", "display:flex !important"); 
+            date.setAttribute("style", "display:flex !important");
             habitFrequencySetup();
         }); 
 
@@ -140,6 +145,11 @@ async function habitFrequencySetup(){
             selectedHabitId = btnHabitId;
         })
     }
+    //TODO: code for selecting start date
+    let todaysDate =  new Date().toISOString().split("T")[0]
+    selectedDate.min = todaysDate;
+    selectedDate.value = todaysDate;
+
 
     const frequencyData = await getAllfrequencies();
     let listToAppend = document.querySelector("#frequencyItems")
@@ -178,44 +188,53 @@ async function habitFrequencySetup(){
 
         })
     }
-
-    //TODO: code for selecting start date
-
-
+    
     let submitForm = document.querySelector("#submit");
-    submitForm.addEventListener("submit", createHabit);
+    submitForm.addEventListener("click", createHabit);
 
 }
 
 async function createHabit(event){
     event.preventDefault();
+    let user = await fetchUserIDByUsername(localStorage.getItem("username"))
+    console.log(user);
     const data ={
         habitId: selectedHabitId,
         frequencyID: habitFrequency,
-        startDate: startDate
+        startDate: selectedDate.value
     }
+
+    console.log(data)
 
     try{
         const options = {
             method: "POST",
-            //TODO: Figure out how to format the data
             body: JSON.stringify(data),
             headers:{ "Content-Type": "application/json" }
         }
 
-        const response = await fetch("http://localhost:3000/user/:id/habits", options);
+        const response = await fetch(`http://localhost:3000/user/${user}/habits`, options);
+        console.log(response);
         const err = await response.json();
+        console.log(err);
 
         if(err){
             throw Error(err);
         }
         else{
+            console("No errors")
             window.location.assign("dashboard.html");
         }
     }
     catch{
         console.warn(err);
     }
+}
+
+async function fetchUserIDByUsername(uName) {
+    let response = await fetch(`http://localhost:3000/user/${uName}`);
+    let userID = await response.json();
+    return userID;
 }
 
 async function getAllCategories(){

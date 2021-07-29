@@ -1,3 +1,6 @@
+//let baseApiUrl = 'https://habitual-2021.herokuapp.com';
+const baseApiUrl = 'http://localhost:3000';
+
 const form = document.getElementById('login');
 form.addEventListener('submit', login);
 
@@ -16,7 +19,7 @@ async function login(e) {
             headers: { "Content-Type": "application/json" }
         };
 
-        const response = await fetch('http://localhost:3000/auth/login', options)
+        const response = await fetch(`${baseApiUrl}/auth/login`, options)
         const data = await response.json()
         if (!data.success) {
             throw new Error('User Not Authorised');

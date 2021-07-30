@@ -1,4 +1,4 @@
-const api_url = 'http://quotes.rest/qod.json';
+const api_url = 'https://quotes.rest/qod.json';
 
 async function getQuote() {
   try {

@@ -97,61 +97,36 @@ async function setup() {
 
 async function habitFrequencySetup(){
 
-    let habitItems = document.querySelectorAll("button[id^='habit']");
+  let habitItems = document.querySelectorAll("button[id^='habit']");
 
-    for(let i = 0; i < habitItems.length; i++){
-        habitItems[i].addEventListener("click", ()=>{
-            let btnState = habitItems[i].value;
-            let btncolor;
-            let btnHabitId = habitItems[i].id.split("habit")[1];
+  for(let i = 0; i < habitItems.length; i++){
+      habitItems[i].addEventListener("click", ()=>{
+          let btnState = habitItems[i].value;
+          let btncolor;
+          let btnHabitId = habitItems[i].id.split("habit")[1];
+          
+          switch(btnState){
+              case "0":
+                  btncolor = "#8fe787";
+                  btnState = 1;
+                  break;
+              case "1":
+                  btncolor = "#FFE3BD";
+                  btnState = 0;
+                  break;
+          }
+          
+          habitItems[i].value = btnState;
+          buttonStates(btnHabitId,btnState,habitItems);
+          habitItems[i].setAttribute("style", `background-color:${btncolor}`); 
 
-            switch(btnState){
-                case "0":
-                    btncolor = "#8fe787";
-                    btnState = 1;
-                    break;
-                case "1":
-                    btncolor = "#FFE3BD";
-                    btnState = 0;
-                    break;
-            }
-
-            habitItems[i].value = btnState;
-            buttonStates(btnHabitId,btnState,habitItems);
-            habitItems[i].setAttribute("style", `background-color:${btncolor}`); 
-
-            selectedHabitId = btnHabitId;
-        })
-    }
-   
-    let todaysDate =  new Date().toISOString().split("T")[0]
-    selectedDate.min = todaysDate;
-    selectedDate.value = todaysDate;
-
-  for (let i = 0; i < habitItems.length; i++) {
-    habitItems[i].addEventListener('click', () => {
-      let btnState = habitItems[i].value;
-      let btncolor;
-      let btnHabitId = habitItems[i].id.split('habit')[1];
-
-      switch (btnState) {
-        case '0':
-          btncolor = 'green';
-          btnState = 1;
-          break;
-        case '1':
-          btncolor = '#FFE3BD';
-          btnState = 0;
-          break;
-      }
-
-      habitItems[i].value = btnState;
-      buttonStates(btnHabitId, btnState, habitItems);
-      habitItems[i].setAttribute('style', `background-color:${btncolor}`);
-
-      selectedHabitId = btnHabitId;
-    });
+          selectedHabitId = btnHabitId;
+      })
   }
+  
+  let todaysDate =  new Date().toISOString().split("T")[0]
+  selectedDate.min = todaysDate;
+  selectedDate.value = todaysDate;
 
   const frequencyData = await getAllfrequencies();
   let listToAppend = document.querySelector('#frequencyItems');

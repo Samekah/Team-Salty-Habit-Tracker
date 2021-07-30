@@ -114,7 +114,7 @@ async function habitFrequencySetup(){
 
             switch(btnState){
                 case "0":
-                    btncolor = "green";
+                    btncolor = "#8fe787";
                     btnState = 1;
                     break;
                 case "1":

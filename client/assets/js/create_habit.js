@@ -153,10 +153,6 @@ async function habitFrequencySetup(){
     });
   }
 
-  let todaysDate = new Date().toISOString().split('T')[0];
-  selectedDate.min = todaysDate;
-  selectedDate.value = todaysDate;
-
   const frequencyData = await getAllfrequencies();
   let listToAppend = document.querySelector('#frequencyItems');
 

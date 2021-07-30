@@ -7,10 +7,11 @@
     "test": "jest --watchAll",
     "coverage": "jest --coverage"
   },
-  
   "jest": {
     "resetMocks": false,
-    "setupFiles": ["jest-localstorage-mock"],
+    "setupFiles": [
+      "jest-localstorage-mock"
+    ],
     "testEnvironment": "jsdom"
   },
   "keywords": [],

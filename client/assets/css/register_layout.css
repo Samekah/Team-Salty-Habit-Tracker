@@ -1,0 +1,53 @@
+*{
+    box-sizing: border-box;
+}
+
+:root{
+    --btn-cream: #FFE3BD;
+    --btn-cream-hover: #e7bf87;
+    --btn-font-color: #7278B3;
+    --background: #D6DAFF;
+    --section-background:#FFF6D6;
+    --link-highlight: #0D22EE;
+    --border-colour: #B3A884;
+    --section-highlight: #FFFCF0;
+}
+
+body {
+    background: var(--background);
+}
+
+nav{
+    background-color: var(--section-background) !important;
+}
+
+.logindiv {
+    width:75vw;
+    padding-bottom:20px;
+    border-radius: 10px;
+    border: 2px solid var(--border-colour);
+    background: var(--section-background);
+}
+
+input [type="username"] {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+input [type="password"] {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top: 0px;
+}
+
+#registerb {
+    background-color: var(--btn-cream);
+    border: 2px solid var(--border-colour);
+    color: var(--btn-font-color);
+}
+
+#registerb:hover {
+    background-color: var(--btn-cream-hover);
+    border: 2px solid var(--border-colour);
+    color: white;
+}

@@ -2,27 +2,28 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: #d6daff;
+:root{
+    --btn-cream: #FFE3BD;
+    --btn-cream-hover: #e7bf87;
+    --btn-font-color: #7278B3;
+    --background: #D6DAFF;
+    --section-background:#FFF6D6;
+    --link-highlight: #0D22EE;
+    --border-colour: #B3A884;
+    --section-highlight: #FFFCF0;
 }
 
-section,
-nav {
-  background-color: #fff6d6;
+body{
+    background-color: var(--background) !important ;
 }
 
-/* body{
-      display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    margin: 0;
-} */
+nav{
+    background-color: var(--section-background) !important;
+}
 
-header {
-  margin-bottom: 15px;
+header{
+    margin-bottom: 40px;
+
 }
 
 h1,
@@ -31,20 +32,24 @@ h2 {
   display: inline;
 }
 
-#userInfo,
-#quote,
-#habitSection {
-  border: 2px solid black;
-}
 
-.habitItem {
-  margin: 15px 0px;
+.habitItem{
+    margin: 15px 0px;;
+
 }
 
 .container {
   margin-bottom: 15px;
   padding: 15px 30px !important;
   border-radius: 5px;
+}
+
+.nav-link{
+    color:black !important;
+}
+
+.nav-item.active>.nav-link{
+    color:var(--link-highlight) !important;
 }
 
 #quote h2 {
@@ -58,24 +63,26 @@ h2 {
 }
 
 #userInfo img {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  background-color: #d6daff;
+    height: 50px;
+    width: 50px;
+    border: 1px solid var(--border-colour);
+    border-radius: 50%;
+    background-color: var(--section-highlight);
+    margin-right: 15px;
 }
 
 #userInfo button,
 #habitInfo button {
-  float: right;
-  border: 5px;
-  border-radius: 5px;
-  background-color: #ffe3bd;
-  padding: 10px 15px;
+    float: right;
+    border: 1px solid var(--border-colour);
+    border-radius: 5px;
+    background-color: var(--btn-cream);
+    padding: 10px 15px;
 }
 
 #userInfo button:hover,
 #habitInfo button:hover {
-  background-color: #7278b3;
+    background-color: var(--btn-cream-hover);
 }
 
 #userInfo button a,
@@ -84,6 +91,15 @@ h2 {
   color: black;
 }
 
-/* [id^='updateStreak1']{
-    background-color:blue;
-} */
+#habitSection, #quote, #userInfo{
+    background-color: var(--section-background);
+    border-radius: 15px; 
+    border: 2px solid var(--border-colour);
+}
+
+#habits{
+    background-color: var(--section-highlight);
+    border-radius: 15px;
+    padding: 25px;
+}
+

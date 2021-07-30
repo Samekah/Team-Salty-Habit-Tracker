@@ -5,6 +5,8 @@
 
 :root{
     --btn-cream: #FFE3BD;
+    --btn-cream-hover: #e7bf87;
+    --btn-selected: #8fe787;
     --btn-font-color: #7278B3;
     --background: #D6DAFF;
     --section-background:#FFF6D6;
@@ -12,6 +14,14 @@
     --border-colour: #B3A884;
     --section-highlight: #FFFCF0;
 
+}
+
+body{
+    background-color: var(--background) !important;
+}
+
+nav{
+    background-color: var(--section-background) !important;
 }
 
 /* move to style css */
@@ -24,11 +34,20 @@ button[id ^= "category"], button[id^='habit']{
     width: 10em;
     height: 10em;
     border-radius: 50% !important;
+    border: 2px solid var(--border-colour);
+}
+
+.nav-link{
+    color:black !important;
 }
 
 [class ^= "col"], #dropdown{
     margin: 25px 0px !important;
     
+}
+
+button[id^='habit']:hover, [id^='category']:hover {
+    background-color: var(--btn-cream-hover);
 }
 
 #submit{
@@ -44,4 +63,10 @@ button[id ^= "category"], button[id^='habit']{
 
 #startDate{
     margin-left: 15px;
+}
+
+#content{
+    background-color: var(--section-background);
+    border-radius: 15px;
+    border:2px solid var(--border-colour);
 }

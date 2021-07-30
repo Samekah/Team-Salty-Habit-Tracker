@@ -1,5 +1,5 @@
-//const baseApiUrl = 'https://habitual-2021.herokuapp.com';
-const baseApiUrl = 'http://localhost:3000';
+const baseApiUrl = 'https://habitual-2021.herokuapp.com';
+//const baseApiUrl = 'http://localhost:3000';
 
 const form = document.getElementById('register');
 form.addEventListener('submit', register);

@@ -1,5 +1,5 @@
-//const baseApiUrl = 'https://habitual-2021.herokuapp.com';
-const baseApiUrl = 'http://localhost:3000';
+const baseApiUrl = 'https://habitual-2021.herokuapp.com';
+//const baseApiUrl = 'http://localhost:3000';
 
 let habitHeading = document.querySelector('#instruction');
 let frequency = document.querySelector('#dropdown');

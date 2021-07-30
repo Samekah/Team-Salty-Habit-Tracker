@@ -1,5 +1,5 @@
-//const baseApiUrl = 'https://habitual-2021.herokuapp.com';
-const baseApiUrl = 'http://localhost:3000';
+const baseApiUrl = 'https://habitual-2021.herokuapp.com';
+//const baseApiUrl = 'http://localhost:3000';
 
 const usernameInLocalStorage = localStorage.getItem('username');
 let logoutButton

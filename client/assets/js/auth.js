@@ -1,5 +1,5 @@
-//const authApiUrl = 'https://habitual-2021.herokuapp.com';
-const authApiUrl = 'http://localhost:3000';
+const authApiUrl = 'https://habitual-2021.herokuapp.com';
+//const authApiUrl = 'http://localhost:3000';
 
 authoriseUser();
 

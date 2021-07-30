@@ -2,12 +2,36 @@
     box-sizing: border-box;
 }
 
+:root{
+    --btn-cream: #FFE3BD;
+    --btn-cream-hover: #e7bf87;
+    --btn-font-color: #7278B3;
+    --background: #D6DAFF;
+    --section-background:#FFF6D6;
+    --link-highlight: #0D22EE;
+    --border-colour: #B3A884;
+    --section-highlight: #FFFCF0;
+}
+
 body {
-    background: #fff6D6;
+    background: var(--background);
+}
+nav{
+    background-color: var(--section-background) !important;
+}
+
+form{
+    max-width:480px;
+    margin:auto;
+    padding:10px;
 }
 
 .logindiv {
-    background: #d6daff;
+    width:75vw;
+    padding-bottom:20px;
+    border-radius: 10px;
+    border: 2px solid var(--border-colour);
+    background: var(--section-background);
 }
 
 input [type="username"] {
@@ -21,11 +45,13 @@ input [type="password"] {
 }
 
 #loginb {
-    background-color: #fff6D6;
-    border: 2px solid transparent;
-    color: black;
+    background-color: var(--btn-cream);
+    border: 2px solid var(--border-colour);
+    color: var(--btn-font-color);
 }
 
 #loginb:hover {
-    border: 2px solid #7278B3;
+    background-color: var(--btn-cream-hover);
+    border: 2px solid var(--border-colour);
+    color: white;
 }

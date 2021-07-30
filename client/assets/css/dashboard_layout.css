@@ -3,14 +3,14 @@
 }
 
 :root{
-    --btn-cream: #FFE3BD;
-    --btn-cream-hover: #e7bf87;
-    --btn-font-color: #7278B3;
-    --background: #D6DAFF;
-    --section-background:#FFF6D6;
-    --link-highlight: #0D22EE;
-    --border-colour: #B3A884;
-    --section-highlight: #FFFCF0;
+  --btn-cream: #FFE3BD;
+  --btn-cream-hover: #e7bf87;
+  --btn-font-color: #7278B3;
+  --background: #D6DAFF;
+  --section-background:#FFF6D6;
+  --link-highlight: #0D22EE;
+  --border-colour: #B3A884;
+  --section-highlight: #FFFCF0;
 }
 
 body{
